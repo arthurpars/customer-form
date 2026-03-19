@@ -108,7 +108,6 @@ function requiredBorder(inputEl) {
 
 // All address fields are required
 requiredBorder(street1);
-requiredBorder(street2);
 requiredBorder(city);
 requiredBorder(stateProvince);
 requiredBorder(postal);
@@ -203,7 +202,6 @@ function validate() {
 
   // Address — all 5 fields required, each gets its own red border
   if (street1.value.trim() === "") street1.classList.add("input-error");
-  if (street2.value.trim() === "") street2.classList.add("input-error");
   if (city.value.trim() === "") city.classList.add("input-error");
   if (stateProvince.value.trim() === "")
     stateProvince.classList.add("input-error");
@@ -212,7 +210,6 @@ function validate() {
   // Show the shared error badge and pink background if any address field is empty
   if (
     street1.value.trim() === "" ||
-    street2.value.trim() === "" ||
     city.value.trim() === "" ||
     stateProvince.value.trim() === "" ||
     postal.value.trim() === ""
