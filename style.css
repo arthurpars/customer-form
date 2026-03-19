@@ -1,0 +1,401 @@
+/* =====================================================
+   COLOR VARIABLES
+   Defined once here, used everywhere with var(--name)
+===================================================== */
+:root {
+  --dark-blue: rgb(46, 105, 255);
+  --dark-red: rgb(242, 58, 60);
+  --green-color: rgb(24, 189, 91);
+  --light-blue: rgb(241, 245, 255);
+  --light-red: rgb(255, 237, 237);
+  --main-text: rgb(44, 51, 69);
+  --secondary-text: rgb(87, 100, 126);
+  --table-color: rgb(195, 202, 216);
+}
+
+/* =====================================================
+   RESET
+   Removes default browser margin/padding from everything
+===================================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* =====================================================
+   BODY — full page background and font
+===================================================== */
+body {
+  background-color: #e5e7eb;
+  color: var(--main-text);
+  font-family: "Inter", sans-serif;
+  min-height: 100vh;
+  padding: 40px 20px;
+}
+
+/* =====================================================
+   PAGE WRAPPER — horizontally centers the card
+===================================================== */
+.page {
+  display: flex;
+  justify-content: center;
+}
+
+/* =====================================================
+   CARD — the white box that holds the form
+===================================================== */
+.card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  max-width: 680px;
+  overflow: hidden;
+  width: 100%;
+}
+
+/* =====================================================
+   CARD HEADER — title area at the top
+===================================================== */
+.card-header {
+  border-bottom: 1px solid #e0e0e0;
+  padding: 24px 32px;
+}
+
+.card-header h1 {
+  color: var(--main-text);
+  font-size: 24px;
+  font-weight: 700;
+}
+
+/* =====================================================
+   FORM — inner padding
+===================================================== */
+form {
+  padding: 0 32px 32px;
+}
+
+/* =====================================================
+   FORM SECTION — one block of the form (e.g. Full Name)
+   JS adds "error-section" to turn it pink on error
+===================================================== */
+.form-section {
+  border-radius: 6px;
+  margin-top: 24px;
+  padding: 16px;
+}
+
+/* Pink background when section has errors */
+.form-section.error-section {
+  background-color: var(--light-red);
+}
+
+/* Optional sections have no background */
+.form-section.no-bg {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* =====================================================
+   FIELD LABEL — bold text above each input
+===================================================== */
+.field-label {
+  color: var(--main-text);
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+/* Red asterisk for required fields */
+.required {
+  color: var(--dark-red);
+}
+
+/* =====================================================
+   FIELD GROUP — wraps one input + hint + error message
+===================================================== */
+.field-group {
+  margin-bottom: 12px;
+}
+
+/* Puts two field-groups side by side */
+.field-row {
+  display: flex;
+  gap: 16px;
+}
+
+/* Each item in a row gets equal width */
+.field-row .field-group {
+  flex: 1;
+}
+
+/* =====================================================
+   INPUTS, SELECT, TEXTAREA — shared base styles
+===================================================== */
+input[type="text"],
+select,
+textarea {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: var(--main-text);
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  outline: none;
+  padding: 8px 12px;
+  transition: border-color 0.2s;
+  width: 100%;
+}
+
+/* Blue border when focused */
+input[type="text"]:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--dark-blue);
+}
+
+/* Red border when JS adds "input-error" class */
+input.input-error,
+select.input-error {
+  border-color: var(--dark-red);
+}
+
+/* User can resize textarea vertically */
+textarea {
+  resize: vertical;
+}
+
+/* =====================================================
+   HINT TEXT — small grey label below an input
+===================================================== */
+.field-hint {
+  color: var(--secondary-text);
+  display: block;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+/* =====================================================
+   ERROR MESSAGE — red badge below a broken field
+   Hidden by default, JS adds "visible" to show it
+===================================================== */
+.error-msg {
+  align-items: center;
+  background-color: var(--dark-red);
+  border-radius: 4px;
+  color: white;
+  display: none;
+  font-size: 12px;
+  font-weight: 500;
+  gap: 6px;
+  margin-top: 6px;
+  padding: 4px 10px;
+}
+
+/* Shown when JS adds "visible" */
+.error-msg.visible {
+  display: inline-flex;
+}
+
+/* Icon before the error text */
+.error-msg::before {
+  content: "⊘";
+  font-size: 13px;
+}
+
+/* =====================================================
+   DIVIDER — horizontal line between sections
+===================================================== */
+.divider {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 24px 0 0;
+}
+
+/* =====================================================
+   CUSTOM CHECKBOXES
+   Real checkbox is hidden, we draw our own styled one
+===================================================== */
+
+/* Stack checkboxes vertically */
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Row: [box] Label */
+.checkbox-label {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  font-size: 14px;
+  gap: 10px;
+  user-select: none;
+}
+
+/* Hide the real browser checkbox */
+.checkbox-label input[type="checkbox"] {
+  display: none;
+}
+
+/* Our custom styled box */
+.checkmark {
+  align-items: center;
+  border: 2px solid #ccc;
+  border-radius: 3px;
+  display: flex;
+  flex-shrink: 0;
+  height: 18px;
+  justify-content: center;
+  transition: all 0.2s;
+  width: 18px;
+}
+
+/* Blue fill when checked */
+.checkbox-label input[type="checkbox"]:checked + .checkmark {
+  background-color: var(--dark-blue);
+  border-color: var(--dark-blue);
+}
+
+/* White tick inside the blue box */
+.checkbox-label input[type="checkbox"]:checked + .checkmark::after {
+  border: 2px solid white;
+  border-left: none;
+  border-top: none;
+  content: "";
+  display: block;
+  height: 8px;
+  transform: rotate(45deg) translateY(-1px);
+  width: 4px;
+}
+
+/* =====================================================
+   REFERENCES TABLE
+===================================================== */
+.ref-table {
+  border-collapse: collapse;
+  font-size: 13px;
+  width: 100%;
+}
+
+/* Header cells */
+.ref-table th {
+  background-color: var(--light-blue);
+  border: 1px solid var(--table-color);
+  color: var(--secondary-text);
+  font-weight: 500;
+  padding: 10px 12px;
+  text-align: left;
+}
+
+/* Data cells */
+.ref-table td {
+  border: 1px solid var(--table-color);
+  padding: 4px;
+}
+
+/* Row number cell (1, 2) */
+.ref-table td.row-num {
+  background-color: var(--light-blue);
+  color: var(--secondary-text);
+  font-weight: 500;
+  padding: 8px 12px;
+  text-align: center;
+  width: 40px;
+}
+
+/* Inputs inside the table — no border, no radius */
+.ref-table input[type="text"] {
+  border: none;
+  border-radius: 0;
+  padding: 6px 8px;
+}
+
+/* Blue background on focus inside table */
+.ref-table input[type="text"]:focus {
+  background-color: var(--light-blue);
+  border: none;
+}
+
+/* =====================================================
+   SUBMIT BUTTON
+===================================================== */
+.form-actions {
+  margin-top: 32px;
+}
+
+.submit-btn {
+  background-color: var(--green-color);
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 12px 32px;
+  transition: background-color 0.2s;
+}
+
+/* Darker green on hover */
+.submit-btn:hover {
+  background-color: #15a85e;
+}
+
+/* =====================================================
+   SUCCESS MODAL
+   Hidden by default, JS adds "visible" to show it
+===================================================== */
+.modal-overlay {
+  align-items: center;
+  background: rgba(0, 0, 0, 0.4);
+  display: none;
+  height: 100%;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+/* Shown when JS adds "visible" */
+.modal-overlay.visible {
+  display: flex;
+}
+
+/* White box in the center of the overlay */
+.modal-box {
+  background: white;
+  border-radius: 12px;
+  max-width: 320px;
+  padding: 48px 40px;
+  text-align: center;
+  width: 90%;
+}
+
+/* Green circle with checkmark */
+.modal-icon {
+  align-items: center;
+  border: 3px solid var(--green-color);
+  border-radius: 50%;
+  color: var(--green-color);
+  display: flex;
+  font-size: 38px;
+  height: 72px;
+  justify-content: center;
+  margin: 0 auto 20px;
+  width: 72px;
+}
+
+.modal-box h2 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.modal-box p {
+  color: var(--secondary-text);
+  font-size: 14px;
+}

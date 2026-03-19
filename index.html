@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customer Details Form</title>
+
+    <!-- Load Inter font from Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Our styles -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- SUCCESS MODAL — hidden by default, JS shows it on success -->
+    <div class="modal-overlay" id="successModal">
+      <div class="modal-box">
+        <div class="modal-icon">&#10003;</div>
+        <h2>Thank You!</h2>
+        <p>Your submission has been received.</p>
+      </div>
+    </div>
+
+    <!-- PAGE WRAPPER — centers the card -->
+    <div class="page">
+      <!-- White card -->
+      <div class="card">
+        <!-- Title -->
+        <div class="card-header">
+          <h1>Customer Details:</h1>
+        </div>
+
+        <form id="customerForm">
+          <!-- FULL NAME — JS uses id="section-fullName" to highlight on error -->
+          <div class="form-section" id="section-fullName">
+            <label class="field-label">
+              Full Name <span class="required">*</span>
+            </label>
+
+            <!-- Two inputs side by side -->
+            <div class="field-row">
+              <div class="field-group">
+                <input type="text" id="firstName" />
+                <span class="field-hint">First Name</span>
+                <!-- Error badge — hidden until JS adds class "visible" -->
+                <span class="error-msg" id="error-firstName"
+                  >This field is required.</span
+                >
+              </div>
+              <div class="field-group">
+                <input type="text" id="lastName" />
+                <span class="field-hint">Last Name</span>
+                <span class="error-msg" id="error-lastName"
+                  >This field is required.</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- ADDRESS -->
+          <div class="form-section" id="section-address">
+            <label class="field-label">
+              Address <span class="required">*</span>
+            </label>
+
+            <div class="field-group">
+              <input type="text" id="street1" />
+              <span class="field-hint">Street Address</span>
+            </div>
+
+            <div class="field-group">
+              <input type="text" id="street2" />
+              <span class="field-hint">Street Address Line 2</span>
+            </div>
+
+            <!-- City and State side by side -->
+            <div class="field-row">
+              <div class="field-group">
+                <input type="text" id="city" />
+                <span class="field-hint">City</span>
+              </div>
+              <div class="field-group">
+                <input type="text" id="stateProvince" />
+                <span class="field-hint">State / Province</span>
+              </div>
+            </div>
+
+            <div class="field-group">
+              <input type="text" id="postal" />
+              <span class="field-hint">Postal / Zip Code</span>
+              <!-- One shared error badge for the whole address section -->
+              <span class="error-msg" id="error-address"
+                >This field is required.</span
+              >
+            </div>
+          </div>
+
+          <!-- PHONE NUMBER -->
+          <div class="form-section" id="section-phone">
+            <label class="field-label">
+              Phone Number <span class="required">*</span>
+            </label>
+            <div class="field-group">
+              <input type="text" id="phone" placeholder="(000) 000-0000" />
+              <span class="error-msg" id="error-phone"
+                >This field is required.</span
+              >
+            </div>
+          </div>
+
+          <!-- EMAIL — optional -->
+          <div class="form-section" id="section-email">
+            <label class="field-label">E-mail</label>
+            <div class="field-group">
+              <input type="text" id="email" placeholder="ex: email@yahoo.com" />
+              <span class="field-hint">example@example.com</span>
+              <span class="error-msg" id="error-email"
+                >Enter a valid e-mail address.</span
+              >
+            </div>
+          </div>
+
+          <!-- Horizontal line between personal info and feedback section -->
+          <hr class="divider" />
+
+          <!-- HOW DID YOU HEAR ABOUT US — dropdown -->
+          <div class="form-section" id="section-hearAbout">
+            <label class="field-label">
+              How did you hear about us? <span class="required">*</span>
+            </label>
+            <div class="field-group">
+              <!-- <option value=""> is the default empty choice -->
+              <select id="hearAbout">
+                <option value="">Please Select</option>
+                <option value="None">None</option>
+                <option value="Newspaper">Newspaper</option>
+                <option value="Internet">Internet</option>
+                <option value="Magazine">Magazine</option>
+                <option value="Other">Other (Please specify...)</option>
+              </select>
+              <span class="error-msg" id="error-hearAbout"
+                >This field is required.</span
+              >
+            </div>
+          </div>
+
+          <!-- OTHER — hidden by default, JS shows it when "Other" is selected -->
+          <div class="form-section" id="section-other" style="display: none">
+            <label class="field-label">
+              Other <span class="required">*</span>
+            </label>
+            <div class="field-group">
+              <input type="text" id="otherText" />
+              <span class="error-msg" id="error-otherText"
+                >This field is required.</span
+              >
+            </div>
+          </div>
+
+          <!-- FEEDBACK — optional, multi-line text box -->
+          <div class="form-section no-bg">
+            <label class="field-label">Feedback about us:</label>
+            <div class="field-group">
+              <textarea id="feedback" rows="5"></textarea>
+            </div>
+          </div>
+
+          <!-- SUGGESTIONS — optional, multi-line text box -->
+          <div class="form-section no-bg">
+            <label class="field-label"
+              >Suggestions if any for further improvement:</label
+            >
+            <div class="field-group">
+              <textarea id="suggestions" rows="5"></textarea>
+            </div>
+          </div>
+
+          <!-- RECOMMEND CHECKBOXES — optional -->
+          <!-- Clicking the label text also toggles the checkbox -->
+          <div class="form-section no-bg">
+            <label class="field-label"
+              >Will you be willing to recommend us?</label
+            >
+            <div class="checkbox-group">
+              <label class="checkbox-label">
+                <input type="checkbox" name="recommend" value="Yes" />
+                <span class="checkmark"></span>
+                Yes
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="recommend" value="Maybe" />
+                <span class="checkmark"></span>
+                Maybe
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="recommend" value="No" />
+                <span class="checkmark"></span>
+                No
+              </label>
+            </div>
+          </div>
+
+          <!-- REFERENCES TABLE — optional, 2 rows -->
+          <!-- thead = header row, tbody = data rows, td = cell, th = header cell -->
+          <div class="form-section no-bg">
+            <label class="field-label">
+              Please give reference of any two people whom you feel:
+            </label>
+            <table class="ref-table">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Full Name</th>
+                  <th>Address</th>
+                  <th>Contact Number</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="row-num">1</td>
+                  <td><input type="text" id="ref1Name" /></td>
+                  <td><input type="text" id="ref1Address" /></td>
+                  <td><input type="text" id="ref1Contact" /></td>
+                </tr>
+                <tr>
+                  <td class="row-num">2</td>
+                  <td><input type="text" id="ref2Name" /></td>
+                  <td><input type="text" id="ref2Address" /></td>
+                  <td><input type="text" id="ref2Contact" /></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- SUBMIT BUTTON -->
+          <div class="form-actions">
+            <button type="submit" class="submit-btn">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Script at the bottom so HTML is fully loaded before JS runs -->
+    <script src="script.js"></script>
+  </body>
+</html>
